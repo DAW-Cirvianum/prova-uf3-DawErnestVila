@@ -36,8 +36,6 @@
 
     ?>
 
-        <!-- Aqui s'ha de canviar -->
-
         <form class="col-11 col-md-9 col-lg-7 col-xl-5 border p-4 my-4 mx-auto bg-light" action="/quiz/store" method="post">
             <h3>QuizzList</h3>
             </h2>

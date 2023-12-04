@@ -33,6 +33,6 @@ class Question extends Orm
         ];
 
         $result = $this->db->queryDataBase($sql, $params);
-        return $result->fetch();
+        return $result->fetchAll();
     }
 }
