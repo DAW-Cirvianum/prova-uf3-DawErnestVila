@@ -1,17 +1,20 @@
 <?php
 
-    include_once(__DIR__ . "/Orm.php");
-    class Question extends Orm {
+include_once(__DIR__ . "/Orm.php");
+class Question extends Orm
+{
 
-        public function __construct() {
-            parent::__construct('questions');
-        }
+    public function __construct()
+    {
+        parent::__construct('questions');
+    }
 
 
-        public static function createTable(){
-            $db = new Database();
-            
-            $sql = "CREATE TABLE IF NOT EXISTS quiz.questions (
+    public static function createTable()
+    {
+        $db = new Database();
+
+        $sql = "CREATE TABLE IF NOT EXISTS quiz.questions (
                 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 question VARCHAR(256) NOT NULL,
                 quiz_id INT NOT NULL,
@@ -19,14 +22,17 @@
                 ) ENGINE=InnoDB;";
 
 
-            $db->queryDataBase($sql);
-
-        }
-
-
-
-
-
+        $db->queryDataBase($sql);
     }
 
-?>
+    public function getByQuizId($id)
+    {
+        $sql = "SELECT * FROM $this->model WHERE quiz_id = :quiz_id";
+        $params = [
+            ":quiz_id" => $id
+        ];
+
+        $result = $this->db->queryDataBase($sql, $params);
+        return $result->fetch();
+    }
+}
